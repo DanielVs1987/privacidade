@@ -1,57 +1,391 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!doctype html>
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Termos de Uso - Lucro do Corre</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Termos de Uso | Lucro do Corre</title>
+  <meta name="description" content="Termos de Uso do aplicativo No Lucro do Corre." />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: auto;
+    :root{
+      --bg:#0f1115;
+      --card:rgba(20,22,28,.92);
+      --stroke:rgba(255,255,255,.10);
+      --text:#e9eef6;
+      --muted:rgba(233,238,246,.75);
+      --accent:#22c55e;
+      --shadow:0 14px 40px rgba(0,0,0,.55);
+      --radius:18px;
     }
-    h2 {
-      margin-top: 30px;
-      color: #333;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    /* Fundo opcional */
+    .bg{
+      position:fixed; inset:0;
+      background:url("assets/fundo.png") center/cover no-repeat;
+      opacity:.18; filter:blur(1px);
+      z-index:-2;
+    }
+    .veil{
+      position:fixed; inset:0;
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(34,197,94,.18), transparent 60%),
+        radial-gradient(900px 500px at 90% 20%, rgba(59,130,246,.12), transparent 55%),
+        linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.55));
+      z-index:-1;
+    }
+
+    header{
+      padding:28px 16px 10px;
+      max-width:1080px;
+      margin:0 auto;
+    }
+    .topbar{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .brand{display:flex; gap:12px; align-items:center}
+    .logo{
+      width:44px; height:44px; border-radius:14px;
+      background:rgba(34,197,94,.18);
+      border:1px solid rgba(34,197,94,.35);
+      display:grid; place-items:center;
+      box-shadow:0 8px 24px rgba(0,0,0,.35);
+      flex:0 0 auto;
+    }
+    .logo span{font-weight:900; color:var(--accent); letter-spacing:.4px}
+    h1{
+      font-size:clamp(22px,3vw,30px);
+      margin:0;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .subtitle{
+      margin:6px 0 0;
+      color:var(--muted);
+      max-width:72ch;
+    }
+    .actions{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
+    .btn{
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:700;
+      transition:transform .08s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .btn:hover{background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16)}
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{border-color:rgba(34,197,94,.35); background:rgba(34,197,94,.12)}
+    .btn.primary:hover{background:rgba(34,197,94,.16)}
+
+    main{
+      max-width:1080px;
+      margin:0 auto;
+      padding:14px 16px 38px;
+      display:grid;
+      grid-template-columns:300px 1fr;
+      gap:14px;
+    }
+    @media (max-width:920px){ main{grid-template-columns:1fr} }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .sidebar{
+      padding:16px;
+      position:sticky;
+      top:12px;
+      height:fit-content;
+    }
+    @media (max-width:920px){ .sidebar{position:relative; top:0} }
+
+    .sidebar h2{
+      font-size:16px;
+      margin:0 0 10px;
+      opacity:.95;
+      letter-spacing:.2px;
+    }
+    .toc{
+      display:flex; flex-direction:column; gap:8px;
+      margin:0; padding:0; list-style:none;
+    }
+    .toc a{
+      color:var(--muted);
+      text-decoration:none;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+      transition:background .2s ease, color .2s ease, border-color .2s ease;
+      display:block;
+    }
+    .toc a:hover{
+      color:var(--text);
+      background:rgba(255,255,255,.05);
+      border-color:rgba(255,255,255,.10);
+    }
+
+    .content{ padding:18px; }
+    .meta{ color:var(--muted); font-size:13px; margin:0 0 14px; }
+
+    section{
+      padding:12px 0;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    section:first-of-type{ border-top:none }
+    h3{ margin:0 0 8px; font-size:18px; letter-spacing:.2px }
+    p{ margin:0 0 10px; color:var(--text) }
+
+    .bullets{
+      margin:0 0 10px 18px;
+      padding:0;
+    }
+    .bullets li{ margin:6px 0 }
+
+    .highlight{
+      border:1px solid rgba(34,197,94,.25);
+      background:rgba(34,197,94,.10);
+      padding:12px;
+      border-radius:14px;
+      margin-top:14px;
+      font-weight:700;
+    }
+    footer{
+      max-width:1080px;
+      margin:0 auto;
+      padding:0 16px 26px;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+    }
+
+    /* Print */
+    @media print{
+      .bg,.veil,.actions,.sidebar{display:none!important}
+      body{background:#fff; color:#000}
+      .card{box-shadow:none; border:none}
+      main{grid-template-columns:1fr}
+      a{color:#000; text-decoration:none}
     }
   </style>
 </head>
+
 <body>
+  <div class="bg"></div>
+  <div class="veil"></div>
 
-  <h1>Termos de Uso - Lucro do Corre</h1>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"><span>LC</span></div>
+        <div>
+          <h1>Termos de Uso</h1>
+          <p class="subtitle">
+            Estes Termos regem o uso do aplicativo <strong>Lucro do Corre</strong>.
+            Ao utilizar o aplicativo, você concorda com as condições abaixo.
+          </p>
+        </div>
+      </div>
 
-  <h2>1. Aceitação dos Termos</h2>
-  <p>Ao acessar ou usar o Aplicativo, você concorda com estes Termos de uso. Se não concordar, não utilize o Aplicativo.</p>
+      <div class="actions">
+        <button class="btn" onclick="window.print()">Imprimir / Salvar PDF</button>
+        <button class="btn primary" onclick="document.getElementById('sec-10').scrollIntoView({behavior:'smooth'})">
+          Ir ao final
+        </button>
+      </div>
+    </div>
+  </header>
 
-  <h2>2. Funcionalidades do Aplicativo</h2>
-  <p>O Aplicativo permite:</p>
-  <ul>
-    <li>Calcular o lucro aproximado de fretes para motoboys.</li>
-    <li>Armazenar dados de entregas e lucros via persistência interna.</li>
-    <li>Exibir anúncios de produtos/serviços de terceiros.</li>
-    <li>Acompanhar o fluxo mensal e diário de viagens.</li>
-  </ul>
+  <main>
+    <aside class="card sidebar" aria-label="Sumário">
+      <h2>Sumário</h2>
+      <ul class="toc">
+        <li><a href="#sec-1">1. Aceitação dos Termos</a></li>
+        <li><a href="#sec-2">2. Funcionalidades do Aplicativo</a></li>
+        <li><a href="#sec-3">3. Captura de Endereço por Foto (OCR) e Rotas</a></li>
+        <li><a href="#sec-4">4. Planos, Limites e Compras no Google Play</a></li>
+        <li><a href="#sec-5">5. Responsabilidade do Usuário</a></li>
+        <li><a href="#sec-6">6. Anúncios e Conteúdo de Terceiros</a></li>
+        <li><a href="#sec-7">7. Armazenamento de Dados e Privacidade</a></li>
+        <li><a href="#sec-8">8. Limitação de Responsabilidade</a></li>
+        <li><a href="#sec-9">9. Modificações nos Termos e no Aplicativo</a></li>
+        <li><a href="#sec-10">10. Encerramento do Uso</a></li>
+      </ul>
+    </aside>
 
-  <h2>3. Responsabilidade do Usuário</h2>
-  <p>Você é responsável pela precisão dos dados inseridos. O cálculo do lucro é uma estimativa e não garante valores exatos. Mantenha seus dados seguros.</p>
+    <article class="card content">
+      <p class="meta">
+        Última atualização: <span id="updatedAt">22/02/2026</span>
+      </p>
 
-  <h2>4. Anúncios de Terceiros</h2>
-  <p>O Aplicativo exibe anúncios para monetização. Não nos responsabilizamos por produtos/serviços anunciados. Interações com anúncios são de sua responsabilidade. Os eventuais descontos anunciados são de inteira responsabilidade do vendedor do produto/serviço.</p>
+      <section id="sec-1">
+        <h3>1. Aceitação dos Termos</h3>
+        <p>
+          Ao acessar ou usar o Aplicativo, você concorda com estes Termos de Uso.
+          Se não concordar, não utilize o Aplicativo.
+        </p>
+      </section>
 
-  <h2>5. Armazenamento de Dados</h2>
-  <p>Os dados ficam armazenados localmente no dispositivo. Não coletamos dados pessoais sem consentimento. Recomendamos fazer backups, pois não nos responsabilizamos por perda de dados.</p>
+      <section id="sec-2">
+        <h3>2. Funcionalidades do Aplicativo</h3>
+        <p>O Aplicativo permite, entre outras funções:</p>
+        <ul class="bullets">
+          <li>Calcular estimativas de lucro/ganhos de fretes.</li>
+          <li>Armazenar dados de entregas e resultados via persistência interna.</li>
+          <li>Exibir anúncios de produtos/serviços de terceiros.</li>
+          <li>Acompanhar fluxo mensal e diário de viagens.</li>
+          <li>Auxiliar no preenchimento/abertura de rotas a partir de um endereço de entrega.</li>
+          <li>(Opcional) Capturar endereço a partir de foto de recibo/comprovante, com leitura automática (OCR).</li>
+        </ul>
+      </section>
 
-  <h2>6. Limitação de Responsabilidade</h2>
-  <p>O Aplicativo é fornecido "como está", sem garantias de precisão absoluta. Não nos responsabilizamos por perdas financeiras ou decisões tomadas com base nos cálculos.</p>
+      <section id="sec-3">
+        <h3>3. Captura de Endereço por Foto (OCR) e Rotas</h3>
+        <p>Quando você usar a funcionalidade de captura de endereço por foto:</p>
+        <ul class="bullets">
+          <li>
+            A leitura automática (OCR) é uma ferramenta de apoio e pode falhar, apresentar imprecisões ou
+            identificar textos incorretos dependendo de iluminação, foco, qualidade da impressão, rasuras,
+            dobras e formato do recibo.
+          </li>
+          <li>Você é responsável por conferir e confirmar o endereço antes de iniciar uma rota.</li>
+          <li>
+            O Aplicativo pode oferecer abrir o endereço em aplicativos de navegação (ex.: Google Maps/Waze).
+            A navegação, rotas sugeridas, tempo estimado e instruções dependem exclusivamente do aplicativo de terceiros.
+          </li>
+          <li>O Aplicativo não garante que o endereço detectado corresponda ao destino correto.</li>
+        </ul>
+      </section>
 
-  <h2>7. Modificações nos Termos</h2>
-  <p>Reservamos o direito de alterar estes Termos a qualquer momento. Alterações serão comunicadas no Aplicativo.</p>
+      <section id="sec-4">
+        <h3>4. Planos, Limites e Compras no Google Play</h3>
+        <p>O Aplicativo pode disponibilizar recursos por meio de planos:</p>
+        <ul class="bullets">
+          <li><strong>Plano Gratuito (Free):</strong> inclui limite de 30 (trinta) capturas de endereço por foto.</li>
+          <li><strong>Plano PRO Vitalício:</strong> compra única (não recorrente) que libera capturas ilimitadas.</li>
+        </ul>
+        <p><strong>Sobre compras:</strong></p>
+        <ul class="bullets">
+          <li>
+            A compra do Plano PRO Vitalício é processada pela Google Play. O Aplicativo não armazena dados de pagamento.
+          </li>
+          <li>
+            O acesso ao PRO pode ser restaurado pelo usuário usando a opção “Restaurar compra”,
+            desde que a compra esteja vinculada à mesma conta Google utilizada no dispositivo.
+          </li>
+          <li>Reembolsos, contestação e políticas de compra seguem as regras da Google Play.</li>
+          <li>
+            Em caso de indisponibilidade temporária da Google Play, do dispositivo ou da conexão,
+            a restauração/validação pode não ocorrer imediatamente.
+          </li>
+        </ul>
+      </section>
 
-  <h2>8. Encerramento do Uso</h2>
-  <p>Podemos suspender ou encerrar seu acesso ao Aplicativo se violar estes Termos.</p>
+      <section id="sec-5">
+        <h3>5. Responsabilidade do Usuário</h3>
+        <ul class="bullets">
+          <li>Você é responsável pela precisão dos dados inseridos ou confirmados no Aplicativo.</li>
+          <li>Os cálculos e relatórios exibidos são estimativas e não garantem valores exatos.</li>
+          <li>Recomenda-se verificar informações antes de tomar decisões financeiras.</li>
+          <li>Mantenha seu dispositivo e seus dados seguros (senha, biometria, backups).</li>
+        </ul>
+      </section>
 
-  <p><strong>Ao usar o Aplicativo, você confirma que leu e aceitou estes Termos.</strong></p>
+      <section id="sec-6">
+        <h3>6. Anúncios e Conteúdo de Terceiros</h3>
+        <p>O Aplicativo pode exibir anúncios para monetização.</p>
+        <ul class="bullets">
+          <li>Não nos responsabilizamos por produtos/serviços anunciados.</li>
+          <li>Interações com anúncios são de responsabilidade do usuário.</li>
+          <li>
+            Preços, descontos e disponibilidade são definidos pelos respectivos fornecedores
+            e podem mudar a qualquer momento, sem aviso prévio.
+          </li>
+        </ul>
+      </section>
 
+      <section id="sec-7">
+        <h3>7. Armazenamento de Dados e Privacidade</h3>
+        <ul class="bullets">
+          <li>Os dados ficam armazenados localmente no dispositivo.</li>
+          <li>O Aplicativo não coleta dados pessoais sem consentimento.</li>
+          <li>Recomendamos realizar backups, pois não nos responsabilizamos por perda de dados.</li>
+          <li>
+            Para a função de OCR, imagens podem ser processadas no próprio dispositivo.
+            Dependendo da implementação, podem ser usados serviços/bibliotecas de terceiros para reconhecimento de texto.
+          </li>
+        </ul>
+      </section>
+
+      <section id="sec-8">
+        <h3>8. Limitação de Responsabilidade</h3>
+        <p>O Aplicativo é fornecido “como está”, sem garantias de precisão absoluta.</p>
+        <ul class="bullets">
+          <li>
+            Não nos responsabilizamos por perdas financeiras, rotas incorretas, atrasos, multas
+            ou decisões tomadas com base em informações exibidas no Aplicativo.
+          </li>
+          <li>O uso de aplicativos de navegação é responsabilidade do usuário.</li>
+        </ul>
+      </section>
+
+      <section id="sec-9">
+        <h3>9. Modificações nos Termos e no Aplicativo</h3>
+        <p>
+          Reservamos o direito de alterar estes Termos e/ou funcionalidades do Aplicativo a qualquer momento.
+          Alterações poderão ser comunicadas no Aplicativo.
+        </p>
+      </section>
+
+      <section id="sec-10">
+        <h3>10. Encerramento do Uso</h3>
+        <p>
+          Podemos suspender ou encerrar seu acesso ao Aplicativo em caso de violação destes Termos.
+        </p>
+
+        <div class="highlight">
+          Ao usar o Aplicativo, você confirma que leu e aceitou estes Termos.
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Lucro do Corre — Termos de Uso.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Scroll suave para links do sumário
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href");
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        history.replaceState(null, "", id);
+      });
+    });
+  </script>
 </body>
 </html>
